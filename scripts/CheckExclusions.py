@@ -12,7 +12,7 @@ ruleSource = (
 '## Any:',
 r'(?i)^.*(\.class|-journal|\.Win386\.SWP|PM_HIBER\.BIN|SAVE2DSK\.BIN|SYSTEM\.DAT|TOSHIBER\.DAT|Thumbs\.db|USER\.DAT|\.bck|\.bkf|\.cdt|\.hdd|\.hds|\.icloud|\.lrprev|\.manifest|\.mum|\.nib|\.nvram|\.ost|\.part|\.pvm|\.pvs|\.rbf|\.tibx?|\.tmp|\.upd|\.avhdx|\.vdi|\.vfd|\.vhd|\.vhdx|\.vmc|\.vmdk|\.vmem|\.vmsd|\.vmsn|\.vmss|\.vmtm|\.vmwarevm|\.vmx|\.vmxf|\.vsv|\.vud|\.xva|memory\.dmp|/Lightroom.*Previews\.lrdata|\.sparsebundle|\.sparseimage|/(cookies|permissions)\.sqlite(-.{3})?)$',
 r'(?i)^.*(/Apple.*/Installer Cache/|/Cache/|/Cookies/|/Music/Subscription/|/Plex Media Server/|/Steam/|/Temp/|/\.dropbox\.cache/|/iPod Photo Cache/|/node_modules/|/tmp/|/tsm_images/|\.Trash|\.hdd/|\.pvm/|\.cprestoretmp|\.nvm|\.npm|/\.gradle/).*',
-
+'',
 '## Mac:',
 r'^.*(\.DS_Store|\.plist|\.strings)$',
 r'(?i)^.*(\.imovielibrary/\.lock)$',
@@ -20,14 +20,14 @@ r'^/(Applications/|Desktop DB|Desktop DF|Network/|Previous Systems|System/|Users
 r'(?i)^.*(/iTunes/Album Artwork/Cache/|/Network Trash Folder/|/Photos Library.*/Thumbnails/|/backups\.backupdb/|/iP.* Software Updates/|/iPhoto Library.*/Thumbnails/|/iPhoto Library/iPod Photo Cache|/migratedphotolibrary/Thumbnails/|\.imovielibrary/.*/Analysis Files/|\.imovielibrary/.*/Render Files/).*',
 r'^.*(/Trash/|/\.fcpcache/|MobileBackups/|\.Spotlight-.*/|\.fseventsd|\.hotfiles\.btree|/bin/|/home/|/sbin/|/cores/|/private/|/var/).*',
 r'(?i)^/(usr/|opt/|etc/|var/|Users/((?!XCode).)*/Applications/|Users/Shared/|dev/|Library/(?!($|Application Support/$|Application Support/CrashPlan/$|Application Support/CrashPlan/print_job_data/.*))|proc/|/Users/.*/.vscode/extensions/).*',
-
+'',
 '## Windows:',
 r'(?i)^.:/(Config\.Msi|HIBERFIL\.SYS|HIBRN8\.DAT|autoexec\.bat|boot\.ini|bootmgr|bootnxt|bootsect\.bak|config\.sys|io\.sys|msdos\.sys|ntdetect\.com|ntldr|swapfile\.sys)$',
 r'(?i)^.*(/I386|/System Volume Information/|/Temporary Internet Files/|/Windows Update Setup Files/|\$RECYCLE\.BIN/|/NTUSER|/Safari/Library/Caches/|/Windows Defender/|/cygwin(64)?/(bin|dev|Pc|lib|sbin|tmp|var|usr)/|UsrClass\.dat).*',
 r'^.*(/Local Settings/Temp|/Local.*/History/|/LocalService/|/MSOCache|/NetHood/|/NetworkService/).*',
 r'(?i)^.*(/pagefile\.sys|\.etl|\.mui)$',
 r'(?i)^.:/(Recovery/|boot/|ESD/|Recycler/|Dell/|Intel/|Oracle/|PerfLogs/|Program Files( \(x86\))?/|Users/All Users/|Users/[^/]+/Apple/MobileSync/|Windows(\.old)?/(?!$|fonts/.*)|\$WINDOWS.~(BT|WS)/|\$SysReset/|\$GetCurrent/|_RESTORE/|_SMSTaskSequence/|safeboot/|swsetup/).*',
-
+'',
 '## Linux:',
 r'^/(cdrom/|dev/fd/|devices/|dvdrom/|initrd/|kernel/|lost\+found/|proc/|run/|selinux/|srv/|sys/|system/|var/(:?run|lock|spool|tmp|cache)/|proc/).*',
 r'^/lib/modules/.*/volatile/\.mounted',
@@ -57,10 +57,10 @@ class rule:
 
 
 parser = argparse.ArgumentParser(description=
-    "Searches a directory tree for files or folders that would be excluded from the new (Oct 2021) CrashPlan backup."
+    "Searches a directory tree for files or folders that would be excluded from the new (Oct 2021) CrashPlan backup. "
     "NB: Does not following symlinks.")
 parser.add_argument('folder', help='File folder to search')
-parser.add_argument('-x', '--exclusions', help='Path to input file containing exclusion data')
+parser.add_argument('-x', '--exclusions', help='Path to input file containing exclusion rules')
 args = parser.parse_args()
 
 # Use sys.platform to compute which platform's rules to use:
