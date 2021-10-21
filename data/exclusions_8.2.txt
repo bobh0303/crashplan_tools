@@ -1,0 +1,110 @@
+## Any
+.*\.cprestoretmp.*
+.*\.part
+.*/(?:42|\d{8,}).*/(?:cp|~).*
+(?i).*/CrashPlan.*/(?:cache|log|conf|manifest|metadata|upgrade)/.*
+/dev/.*
+(?i).*/Google/Chrome/.*cache.*
+.*/Google/Chrome/Safe Browsing.*
+.*/iPhoto Library/iPod Photo Cache/.*
+.*/lost\+found/.*
+(?i).*/Mozilla/Firefox/.*cache.*
+.*/Music/Subscription/.*
+/proc/.*
+/sys/.*
+/tmp/.*
+
+## Mac
+.*\.fseventsd.*
+.*\.hotfiles\.btree.*
+.*\.Spotlight-.*/.*
+.*\.Trash.*
+/\.vol/.*
+/afs/.*
+/automount/.*
+(?i).*/backups.backupdb/.*
+.*/Code42/Code 42 Service.app/*
+.*/Code42/SharePlan Helper.app/*
+.*/Code42/SharePlanMenuItem.app/*
+/cores/.*
+/Desktop DB
+/Desktop DF
+/dev/.*
+.*/iP.* Software Updates/.*
+.*/iPhoto Library/iPod Photo Cache.*
+.*/iTunes/Album Artwork/Cache/.*
+.*/Library/Application Support/SyncServices/.*
+.*/Library/Caches/.*
+.*/Library/Calendars/Calendar Cache
+.*/Library/Logs/.*
+.*/Library/Mail/AvailableFeeds/.*
+.*/Library/Mail/Envelope Index
+.*/Library/Mirrors/.*
+.*/Library/PubSub/Database/.*
+.*/Library/PubSub/Downloads/.*
+.*/Library/PubSub/Feeds/.*
+.*/Library/Safari/HistoryIndex.sk
+.*/Library/Safari/Icons.db
+.*/Library/Safari/WebpageIcons.db
+.*/Library/Saved Application State/.*
+.*/lost\+found/.*
+/mach_kernel
+/mach.sym
+.*/Microsoft User Data/Entourage Temp/.*
+/net/.*
+.*/Network Trash Folder/.*
+/Network/.*
+/Network/Servers.*
+/Previous Systems.*
+/private/Network/.*
+/private/tmp/.*
+/private/var/automount/.*
+/private/var/db/dhcpclient/.*
+/private/var/db/fseventsd/.*
+/private/var/folders/.*
+/private/var/run/.*
+/private/var/spool/postfix/.*
+/private/var/tmp/.*
+/private/var/vm/.*
+/System/Library/Extensions/Caches/.*
+/tmp/.*
+.*/Trash/.*
+/Users/Shared/SC Info.*
+.*/VM Storage
+.*MobileBackups/.*
+
+## Windows
+(?i).*\.rbf
+.*\.tmp
+.*\.tmp/.*
+.*/AppData/Local/Temp.*
+.*/AppData/Temp.*
+.*/Application Data/Application Data.*
+(?i).:/Config\.Msi.*
+(?i).*/hiberfil\.sys
+.*/I386.*
+.*/Local Settings/Temp.*
+.*/Microsoft.*/RecoveryStore.*
+(?i).*/Microsoft.*/Windows/.*\.edb
+(?i).*/Microsoft.*/Windows/.*\.log
+.*/Microsoft.*/Windows/Cookies.*
+.*/MSOCache.*
+(?i).*/ntuser.dat.*
+.*/pagefile.sys
+.*/RECYCLER/.*
+.*/swapfile.sys
+.*/System Volume Information/.*
+.*/Temporary Internet Files/.*
+.*/Windows/Installer.*
+.*/Windows/Temp.*
+(?i).*\$RECYCLE\.BIN/.*
+.*UsrClass\.dat
+.*UsrClass\.dat\.LOG.*
+
+## Linux
+/dev/.*
+.*/lost\+found/.*
+/proc/.*
+/selinux/.*
+/sys/.*
+/tmp/.*

@@ -1,33 +1,3 @@
-.*\.cprestoretmp.*
-.*\.part
-(?i).*\.tmp
-.*/\..*
-.*/(?:42|\d{8,}).*/(?:cp|~).*
-/bin/
-/boot/
-(?i).*/CrashPlan.*/(?:cache|log|conf|manifest|metadata|upgrade)/.*
-/dev/.*
-/etc/
-(?i).*/Google/Chrome/.*cache.*
-.*/Google/Chrome/Safe Browsing.*
-.*/Google/Chrome/User Data/Safe Browsing.*
-/initrd/
-.*/iPhoto Library/iPod Photo Cache/.*
-/lib/
-.*/lost\+found/.*
-(?i).*/Mozilla/Firefox/.*cache.*
-.*/Music/Subscription/.*
-/opt/
-/proc/.*
-/sbin/
-/srv/
-/sys/.*
-(?i).*/temp/
-(?i).*/tmp/
-/tmp/.*
-/usr/
-/var/
-
 ## Any:
 (?i)^.*(\.class|-journal|\.Win386\.SWP|PM_HIBER\.BIN|SAVE2DSK\.BIN|SYSTEM\.DAT|TOSHIBER\.DAT|Thumbs\.db|USER\.DAT|\.bck|\.bkf|\.cdt|\.hdd|\.hds|\.icloud|\.lrprev|\.manifest|\.mum|\.nib|\.nvram|\.ost|\.part|\.pvm|\.pvs|\.rbf|\.tibx?|\.tmp|\.upd|\.avhdx|\.vdi|\.vfd|\.vhd|\.vhdx|\.vmc|\.vmdk|\.vmem|\.vmsd|\.vmsn|\.vmss|\.vmtm|\.vmwarevm|\.vmx|\.vmxf|\.vsv|\.vud|\.xva|memory\.dmp|/Lightroom.*Previews\.lrdata|\.sparsebundle|\.sparseimage|/(cookies|permissions)\.sqlite(-.{3})?)$
 (?i)^.*(/Apple.*/Installer Cache/|/Cache/|/Cookies/|/Music/Subscription/|/Plex Media Server/|/Steam/|/Temp/|/\.dropbox\.cache/|/iPod Photo Cache/|/node_modules/|/tmp/|/tsm_images/|\.Trash|\.hdd/|\.pvm/|\.cprestoretmp|\.nvm|\.npm|/\.gradle/).*
