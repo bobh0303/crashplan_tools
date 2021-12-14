@@ -3,7 +3,7 @@
 (?i)^.*(/Apple.*/Installer Cache/|/Cache/|/Cookies/|/Music/Subscription/|/Plex Media Server/|/Steam/|/Temp/|/\.dropbox\.cache/|/iPod Photo Cache/|/node_modules/|/tmp/|/tsm_images/|\.Trash|\.hdd/|\.pvm/|\.cprestoretmp|\.nvm|\.npm|/\.gradle/).*
 
 ## Mac:
-^.*(\.DS_Store|\.plist|\.strings)$
+^.*(\.DS_Store|\.strings)$
 (?i)^.*(\.imovielibrary/\.lock)$
 ^/(Applications/|Desktop DB|Desktop DF|Network/|Previous Systems|System/|Users/.*/\.cisco/vpn/log/|Users/.*/\.dropbox/|\.DocumentRevisions-V100/|\.PKInstallSandboxManager-SystemSoftware|\.adobeTemp/|\.vol/|afs/|automount/|lost\+found/|net/).*
 (?i)^.*(/iTunes/Album Artwork/Cache/|/Network Trash Folder/|/Photos Library.*/Thumbnails/|/backups\.backupdb/|/iP.* Software Updates/|/iPhoto Library.*/Thumbnails/|/iPhoto Library/iPod Photo Cache|/migratedphotolibrary/Thumbnails/|\.imovielibrary/.*/Analysis Files/|\.imovielibrary/.*/Render Files/).*
@@ -12,7 +12,7 @@
 
 ## Windows:
 (?i)^.:/(Config\.Msi|HIBERFIL\.SYS|HIBRN8\.DAT|autoexec\.bat|boot\.ini|bootmgr|bootnxt|bootsect\.bak|config\.sys|io\.sys|msdos\.sys|ntdetect\.com|ntldr|swapfile\.sys)$
-(?i)^.*(/I386|/System Volume Information/|/Temporary Internet Files/|/Windows Update Setup Files/|\$RECYCLE\.BIN/|/NTUSER|/Safari/Library/Caches/|/Windows Defender/|/cygwin(64)?/(bin|dev|Pc|lib|sbin|tmp|var|usr)/|UsrClass\.dat).*
+(?i)^.*(/I386|/System Volume Information/|/Temporary Internet Files/|/Windows Update Setup Files/|\$RECYCLE\.BIN/|/NTUSER|/Safari/Library/Caches/|/Windows Defender/|/cygwin(64)?/(bin|dev|etc|lib|sbin|tmp|var|usr)/|UsrClass\.dat).*
 ^.*(/Local Settings/Temp|/Local.*/History/|/LocalService/|/MSOCache|/NetHood/|/NetworkService/).*
 (?i)^.*(/pagefile\.sys|\.etl|\.mui)$
 (?i)^.:/(Recovery/|boot/|ESD/|Recycler/|Dell/|Intel/|Oracle/|PerfLogs/|Program Files( \(x86\))?/|Users/All Users/|Users/[^/]+/Apple/MobileSync/|Windows(\.old)?/(?!$|fonts/.*)|\$WINDOWS.~(BT|WS)/|\$SysReset/|\$GetCurrent/|_RESTORE/|_SMSTaskSequence/|safeboot/|swsetup/).*
