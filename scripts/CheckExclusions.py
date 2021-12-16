@@ -157,6 +157,8 @@ else:
 
     if not(findLine(top) or os.path.isfile(top)):
         for dirpath, dirs, files in os.walk(top):
+            if platform == 'Windows':
+                dirpath = dirpath.replace('\\', '/')
             fileCount += len(files)
             dirCount += len(dirs)
             for f in files:
