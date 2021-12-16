@@ -5,8 +5,9 @@ import re
 import argparse
 import sys
 import os
+import textwrap
 
-# The following exclusion rules were in effect as of 2021-10-18
+# The following exclusion rules were in effect as of 2021-12-15
 # To use alternate rules, format them as below in a text file and use the -x option to read them
 ruleSource = (
 '## Any:',
@@ -56,11 +57,26 @@ class rule:
             raise ValueError
 
 
-parser = argparse.ArgumentParser(description=
-    "Searches a directory tree for files or folders that would be excluded from the new (Oct 2021) CrashPlan backup. "
-    "NB: Does not following symlinks.")
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+    description=textwrap.dedent('''\
+        Searches a directory tree for files or folders that would be excluded 
+        from the new (Oct 2021) CrashPlan backup.'''),
+    epilog=textwrap.dedent('''\
+        Notes:
+            This tool is not aware of file selection settings for any particular back sets.
+            For example your backup set might not include %APPDATA% but this program doesn't
+            know that so will gladly look down through %APPDATA% for files that match the 
+            global exclusion patterns.'    
+             
+            Exclusions are platform-dependent: the exclusions used are the ones applicable
+            to the platform on which the script is running. See comments in sample exclusion 
+            files for details.
+             
+            When traversing the designated directory tree, symlinks are not followed.
+        ''')
+)
 parser.add_argument('folder', help='File folder to search')
-parser.add_argument('-x', '--exclusions', help='Path to input file containing exclusion rules')
+parser.add_argument('-x', '--exclusions', help='Optional path to input file containing exclusion rules')
 args = parser.parse_args()
 
 # Use sys.platform to compute which platform's rules to use:
