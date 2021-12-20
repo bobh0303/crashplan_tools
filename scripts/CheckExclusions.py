@@ -76,7 +76,9 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
         ''')
 )
 parser.add_argument('folder', help='File folder to search')
+parser.add_argument('outfile', help='Name of output file')
 parser.add_argument('-x', '--exclusions', help='Optional path to input file containing exclusion rules')
+parser.add_argument('--csv', help='format output as CSV', action='store_true')
 args = parser.parse_args()
 
 # Use sys.platform to compute which platform's rules to use:
@@ -130,59 +132,54 @@ for lineno,line in enumerate(ruleSource):
 # Keep a count of excluded files or folders
 excludedCount = 0
 
-def findLine(path):
-    """search exclusion rules for the first that matches supplied path; return rule's line number or None"""
-    global excludedCount
-    for r in exclusionsCI + exclusionsCD:
-        m = r.regex.match(path)
-        if m:
-            s = m.start(1)
-            e = m.end(1)
-            print(f'x line {r.lineno}: {path} [{s}:{e}] = "{path[s:e]}"')
-            excludedCount += 1
-            return r.lineno
-    return None
+# set up output file:
+open_args = {'newline':''} if args.csv else {}
+with open(args.outfile, 'w', **open_args) as outfile:
+    if args.csv:
+        import csv
+        csvwriter = csv.writer(outfile)
+        csvwriter.writerow(['rule #', 'path', 'start', 'end', 'match'])
 
-# The following attempted optimization doesn't speed things up much and loses information 
-# about line number so I'm not using it.
+    def findLine(path):
+        """search exclusion rules for the first that matches supplied path; return rule's line number or None"""
+        global excludedCount
+        for r in exclusionsCI + exclusionsCD:
+            m = r.regex.match(path)
+            if m:
+                s = m.start(1)
+                e = m.end(1)
+                if args.csv:
+                    csvwriter.writerow([r.lineno, path, s, e, path[s:e]])
+                else:
+                    outfile.write(f'x line {r.lineno:2}: {path} [{s}:{e}] = "{path[s:e]}"\n')
+                excludedCount += 1
+                return r.lineno
+        return None
 
-### from all the rules, construct 2 composite rules... one case-dependent and one case independent
-##
-##ciRE = re.compile(f'({"|".join([r.pattern for r in exclusionsCI])})', re.I)
-##cdRE = re.compile(f'({"|".join([r.pattern for r in exclusionsCD])})')
-##
-##def isExcluded(path):
-##    """ test path to see if it matches any exclusion rule"""
-##    p = path.replace('\\','/') if platform == 'Windows' else path
-##    if ciRE.match(p) is None and cdRE.match(p) is None:
-##        return False
-##    print(f'X: {path}')
-##    return True
+    # NB: All the global exclusion regexes are written using forward-slash path separator, even for Windows.
+    # Therefore we change \ to / in the results of os.path.abspath() AND we don't use os.path.join() but
+    # rather simply use '/'.join() when joining path elements.
 
-# NB: All the global exclusion regexes are written using forward-slash path separator, even for Windows.
-# Therefore we change \ to / in the results of os.path.abspath() AND we don't use os.path.join() but
-# rather simply use '/'.join() when joining path elements.
+    top = os.path.abspath(args.folder)
+    if platform == 'Windows':
+        top = top.replace('\\', '/')
 
-top = os.path.abspath(args.folder)
-if platform == 'Windows':
-    top = top.replace('\\', '/')
+    if os.path.islink(top):
+        # We're not following links
+        fileCount = dirCount = 0
+    else:
+        fileCount = 1 if os.path.isfile(top) else 0
+        dirCount = 1 if os.path.isdir(top) else 0
 
-if os.path.islink(top):
-    # We're not following links
-    fileCount = dirCount = 0
-else:
-    fileCount = 1 if os.path.isfile(top) else 0
-    dirCount = 1 if os.path.isdir(top) else 0
-
-    if not(findLine(top) or os.path.isfile(top)):
-        for dirpath, dirs, files in os.walk(top):
-            if platform == 'Windows':
-                dirpath = dirpath.replace('\\', '/')
-            fileCount += len(files)
-            dirCount += len(dirs)
-            for f in files:
-                findLine('/'.join((dirpath, f)))
-            # For directory entries, be sure to include a trailing slash
-            dirs[:] = [d for d in dirs if not findLine('/'.join((dirpath, d, '')))]
+        if not(findLine(top) or os.path.isfile(top)):
+            for dirpath, dirs, files in os.walk(top):
+                if platform == 'Windows':
+                    dirpath = dirpath.replace('\\', '/')
+                fileCount += len(files)
+                dirCount += len(dirs)
+                for f in files:
+                    findLine('/'.join((dirpath, f)))
+                # For directory entries, be sure to include a trailing slash
+                dirs[:] = [d for d in dirs if not findLine('/'.join((dirpath, d, '')))]
 
 print(f'\nProcessed {fileCount} {"file" if fileCount==1 else "files"} and {dirCount} {"folder" if dirCount==1 else "folders"}; excluded {excludedCount}')
