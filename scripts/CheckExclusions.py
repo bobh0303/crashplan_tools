@@ -134,8 +134,11 @@ def findLine(path):
     """search exclusion rules for the first that matches supplied path; return rule's line number or None"""
     global excludedCount
     for r in exclusionsCI + exclusionsCD:
-        if r.regex.match(path):
-            print(f'x line {r.lineno}: {path}')
+        m = r.regex.match(path)
+        if m:
+            s = m.start(1)
+            e = m.end(1)
+            print(f'x line {r.lineno}: {path} [{s}:{e}] = "{path[s:e]}"')
             excludedCount += 1
             return r.lineno
     return None
